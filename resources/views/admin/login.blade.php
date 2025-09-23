@@ -1,4 +1,4 @@
-<!-- resources/views/admin/login.blade.php 
+<!-- resources/views/admin/login.blade.php
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +48,7 @@
         @endif
 
 
-        <form action="{{ route('admin.login.submit') }}" method="POST">
+        <form action="{{ route('admin.login') }}" method="POST">
             @csrf
 
             <div style="margin-bottom: 15px;">
