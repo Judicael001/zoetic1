@@ -2,32 +2,36 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>ZoeTIC</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZoeTIC - Prestations & Formations</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    {{-- ✅ TAILWIND CSS PAR CDN (à ne pas modifier) --}}
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    {{-- ✅ Remixicons (si tu les utilises) --}}
-    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-
-    {{-- ✅ Google Fonts --}}
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- Ton CSS personnalisé -->
+    <link rel="stylesheet" href="{{ asset('assets/style.css') }}">
 </head>
+<body>
+    <header class="bg-dark text-white p-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="h3">ZoeTIC</h1>
+            <nav>
+                <a href="{{ route('home') }}" class="btn btn-outline-light btn-sm">Accueil</a>
+                <a href="#" class="btn btn-outline-light btn-sm">Services</a>
+                <a href="#" class="btn btn-outline-light btn-sm">Formations</a>
+                <a href="#" class="btn btn-outline-light btn-sm">Blog</a>
+                <a href="#" class="btn btn-warning btn-sm">Contact</a>
+            </nav>
+        </div>
+    </header>
 
-<body class="bg-white text-gray-800 font-['Open_Sans']">
-
-    {{-- Barre de navigation --}}
-    @include('partials.navbar')
-
-    {{-- Contenu de la page --}}
-    <main class="mt-16">
+    <main class="container py-5">
         @yield('content')
     </main>
 
-    {{-- Pied de page --}}
-    @include('partials.footer')
+    <footer class="bg-light text-center py-3 mt-5 border-top">
+        <p class="mb-0">&copy; {{ date('Y') }} ZoeTIC - Tous droits réservés</p>
+    </footer>
 
-    {{-- Scripts JS ici si besoin --}}
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

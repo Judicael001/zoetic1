@@ -7,8 +7,9 @@ use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminManagerController;
 use App\Http\Controllers\Admin\FormationsController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', fn() => redirect()->route('admin.login'));
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/formations', 'formations');
 Route::view('/contact', 'contact');
 Route::get('/inscription', function () {

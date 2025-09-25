@@ -1,15 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Bienvenue sur ZoeTIC</h2>
+        <p class="text-muted">Votre partenaire en informatique : formation, maintenance et cybersécurité</p>
+    </div>
 
-<!-- CECI EST LE CONTENU DE TA PAGE D’ACCUEIL -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Bureautique</h5>
+                    <p class="card-text">Formations sur Word, Excel, PowerPoint et outils bureautiques.</p>
+                    <a href="#" class="btn btn-primary btn-sm">Découvrir</a>
+                </div>
+            </div>
+        </div>
 
-<section class="text-center py-10 bg-gray-100">
-    <h1 class="text-4xl font-bold text-green-700">Bienvenue sur ZoeTIC</h1>
-    <p class="mt-4 text-lg text-gray-600">Des formations informatiques pour tous</p>
-    <a href="{{ url('/formations') }}" class="mt-6 inline-block bg-green-700 text-white px-6 py-2 rounded hover:bg-green-800">
-        Découvrir nos formations
-    </a>
-</section>
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Cybersécurité</h5>
+                    <p class="card-text">Ateliers pratiques sur la protection des données et des systèmes.</p>
+                    <a href="#" class="btn btn-primary btn-sm">Découvrir</a>
+                </div>
+            </div>
+        </div>
 
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Programmation</h5>
+                    <p class="card-text">Apprenez à coder en Python, JavaScript, PHP et plus encore.</p>
+                    <a href="#" class="btn btn-primary btn-sm">Découvrir</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Outils collaboratifs</h5>
+                    <p class="card-text">Formation sur Teams, Slack, Google Workspace, etc.</p>
+                    <a href="#" class="btn btn-primary btn-sm">Découvrir</a>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
