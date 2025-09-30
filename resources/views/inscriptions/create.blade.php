@@ -48,7 +48,7 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
+            <button type="submit" class="btn  btn-success w-100">S'inscrire</button>
         </form>
 
         <!-- Contact de l'entreprise -->

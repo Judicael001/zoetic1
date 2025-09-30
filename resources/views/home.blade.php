@@ -45,7 +45,7 @@ $services = [
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ $service['title'] }}</h5>
                     <p class="card-text">{{ $service['description'] }}</p>
-                    <a href="{{ route($service['route']) }}" class="btn btn-primary btn-sm">Découvrir</a>
+                    <a href="{{ route($service['route']) }}" class="btn  btn-success btn-sm">Découvrir</a>
                 </div>
             </div>
         </div>
