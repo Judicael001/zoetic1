@@ -2,82 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\admins;
-use Illuminate\Http\Request;
 use App\Models\inscriptions;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function inscriptions()
+    public function showLoginForm()
     {
-        $inscriptions = inscriptions::with('user', 'formation')->latest()->get();
-
-        return view('admin.inscriptions', compact('inscriptions'));
+        return view('admin.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function login(Request $request)
     {
-        //
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            return redirect()->route('admin.inscriptions');
+        }
+
+        return back()->withErrors(['email' => 'Identifiants invalides']);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function logout()
     {
-        //
+        Auth::logout();
+        return redirect()->route('admin.login');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function updateStatut(Request $request, $id)
+    public function index()
     {
-        $request->validate([
-            'statut' => 'required|in:en attente,confirmée,annulée',
-        ]);
-
-        $inscription = \App\Models\inscriptions::findOrFail($id);
-        $inscription->statut = $request->statut;
-        $inscription->save();
-
-        return redirect()->route('admin.inscriptions')->with('success', 'Statut mis à jour avec succès.');
+        $inscriptions = inscriptions::latest()->get();
+        return view('admin.inscriptions.index', compact('inscriptions'));
     }
 
-    public function show($id)
+    public function valider($id)
     {
-        $inscription = \App\Models\inscriptions::with('user', 'formation')->findOrFail($id);
+        $inscription = inscriptions::findOrFail($id);
+        $inscription->update(['statut' => 'valide']);
 
-        return view('admin.inscription-details', compact('inscription'));
+        return back()->with('success', 'Inscription validée.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(admins $admins)
+    public function refuser($id)
     {
-        //
-    }
+        $inscription = inscriptions::findOrFail($id);
+        $inscription->update(['statut' => 'refuse']);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, admins $admins)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(admins $admins)
-    {
-        //
+        return back()->with('success', 'Inscription refusée.');
     }
 }

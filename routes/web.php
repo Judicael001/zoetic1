@@ -6,57 +6,33 @@ use App\Models\Formations;
 use App\Http\Controllers\AdminsController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminManagerController;
-use App\Http\Controllers\Admin\FormationsController;
+use App\Http\Controllers\FormationsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::view('/formations', 'formations');
-Route::view('/contact', 'contact');
-Route::get('/inscription', function () {
-    $formations = Formations::all();
-    return view('inscription', compact('formations'));
-})->name('inscription.form');
+Route::get('/inscription', [InscriptionsController::class, 'create'])->name('inscription.form');
 Route::post('/inscription', [InscriptionsController::class, 'store'])->name('inscription.store');
 
-Route::get('/admin/inscriptions', [AdminsController::class, 'inscriptions'])->name('admin.inscriptions');
+// Auth admin
+Route::get('/admin/login', [AdminsController::class, 'showLoginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminsController::class, 'login'])->name('admin.login.submit');
+Route::post('/admin/logout', [AdminsController::class, 'logout'])->name('admin.logout');
 
-Route::put('/admin/inscriptions/{id}/statut', [AdminsController::class, 'updateStatut'])->name('admin.inscriptions.updateStatut');
-
-
-Route::get('/admin/inscriptions/{id}', [AdminsController::class, 'show'])->name('admin.inscriptions.show');
-
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::get('/admins/create', [AdminManagerController::class, 'create'])->name('admins.create');
-    Route::get('/admins/{id}/edit', [AdminManagerController::class, 'edit'])->name('admins.edit');
-
-    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::post('/admins', [AdminManagerController::class, 'store'])->name('admins.store');
-
-    Route::put('/admins/{id}', [AdminManagerController::class, 'update'])->name('admins.update');
-
-    Route::delete('/admins/{id}', [AdminManagerController::class, 'destroy'])->name('admins.destroy');
-
-
-
-    Route::middleware('auth:admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-
-    Route::get('/admins', [AdminManagerController::class, 'index'])->name('admins.index');
-
-    // ✅ Blocs des routes formations PROTÉGÉES
-    Route::prefix('formations')->name('admin.formations.')->group(function () {
-        Route::get('/', [FormationsController::class, 'index'])->name('index');
-        Route::get('/create', [FormationsController::class, 'create'])->name('create');
-        Route::post('/', [FormationsController::class, 'store'])->name('store');
-        Route::get('/{formation}/edit', [FormationsController::class, 'edit'])->name('edit');
-        Route::put('/{formation}', [FormationsController::class, 'update'])->name('update');
-        Route::delete('/{formation}', [FormationsController::class, 'destroy'])->name('destroy');
-    });
+// Admin espace
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/inscriptions', [AdminsController::class, 'index'])->name('admin.inscriptions');
+    Route::post('/admin/inscriptions/{id}/valider', [AdminsController::class, 'valider'])->name('admin.inscriptions.valider');
+    Route::post('/admin/inscriptions/{id}/refuser', [AdminsController::class, 'refuser'])->name('admin.inscriptions.refuser');
 });
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/services', [HomeController::class, 'services'])->name('services');
+Route::get('/contact', [ContactController::class, 'showForm'])->name('contact');
+Route::post('/contact', [ContactController::class, 'submitForm'])->name('contact.submit');
 
+Route::prefix('formations')->group(function () {
+    Route::get('bureautique', [FormationsController::class, 'bureautique'])->name('formations.bureautique');
+    Route::get('cybersecurite', [FormationsController::class, 'cybersecurite'])->name('formations.cybersecurite');
+    Route::get('programmation', [FormationsController::class, 'programmation'])->name('formations.programmation');
+    Route::get('outils-collaboratifs', [FormationsController::class, 'outilsCollaboratifs'])->name('formations.outils');
 });
-

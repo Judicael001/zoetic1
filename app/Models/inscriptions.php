@@ -10,12 +10,14 @@ class inscriptions extends Model
     //
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'formation_id',
-        'message',
-        'statut',
-        'date_inscription',
+    protected $fillable =
+    [
+        'nom',
+        'prenom',
+        'email',
+        'telephone',
+        'formation',
+        'statut'
     ];
 
     public function user()

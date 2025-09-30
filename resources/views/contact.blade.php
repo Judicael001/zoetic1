@@ -1,8 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="py-12 text-center">
-    <h1 class="text-3xl font-bold text-green-700">Contactez-nous</h1>
-    <p class="mt-4 text-gray-600">Un membre de notre équipe vous répondra dans les plus brefs délais.</p>
-</section>
+<h1>Contactez-nous</h1>
+
+@if(session('success'))
+    <p style="color: green;">{{ session('success') }}</p>
+@endif
+
+<form method="POST" action="{{ route('contact.submit') }}">
+    @csrf
+    <label>Nom :</label>
+    <input type="text" name="name" required>
+    <br>
+
+    <label>Email :</label>
+    <input type="email" name="email" required>
+    <br>
+
+    <label>Message :</label>
+    <textarea name="message" required></textarea>
+    <br>
+
+    <button type="submit">Envoyer</button>
+</form>
 @endsection

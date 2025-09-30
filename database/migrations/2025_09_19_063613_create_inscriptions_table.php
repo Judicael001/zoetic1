@@ -9,17 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
+            $table->string('nom');
+            $table->string('prenom');
+            $table->string('email');
+            $table->string('telephone');
+            $table->string('formation');
+            $table->enum('statut', ['en_attente', 'valide', 'refuse'])->default('en_attente');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('inscriptions');
