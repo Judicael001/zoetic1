@@ -8,7 +8,7 @@
     <style>
         /* Survol des liens en jaune */
         .navbar-nav .nav-link:hover {
-            color: #e3c100 !important;
+            color: #000000 !important;
         }
     </style>
 </head>
@@ -40,7 +40,7 @@
 
                                 <li class="nav-item dropdown ms-3">
                                     <a class="nav-link text-white d-flex align-items-center" href="#" id="adminDropdown" data-bs-toggle="dropdown">
-                                        <img src="{{ asset('assets/admin-icon.png') }}" alt="Admin" style="width: 30px; height: 30px; border-radius: 50%;">
+                                        <img src="{{ asset('assets/images/admin-icon.jpg') }}" alt="Admin" style="width: 30px; height: 30px; border-radius: 50%;">
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
                                         <li>
@@ -95,19 +95,19 @@
                         <!-- Non connecté : menu classique + lien admin -->
                         <ul class="navbar-nav mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ request()->routeIs('home') ? 'fw-bold' : '' }}" href="{{ route('home') }}">Accueil</a>
+                                <a class="nav-link {{ request()->routeIs('home') ? 'fw-bold bg-warning' : 'text-white' }}" href="{{ route('home') }}">Accueil</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ request()->routeIs('about') ? 'fw-bold' : '' }}" href="{{ route('about') }}">À propos</a>
+                                <a class="nav-link {{ request()->routeIs('about') ? 'fw-bold bg-warning' : 'text-white' }}" href="{{ route('about') }}">À propos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ request()->routeIs('services') ? 'fw-bold' : '' }}" href="{{ route('services') }}">Services</a>
+                                <a class="nav-link {{ request()->routeIs('services') ? 'fw-bold bg-warning' : 'text-white' }}" href="{{ route('services') }}">Services</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white {{ request()->routeIs('inscription.store') ? 'fw-bold' : '' }}" href="{{ route('inscription.store') }}">Inscription formation</a>
+                                <a class="nav-link {{ request()->routeIs('inscription.store') ? 'fw-bold bg-warning' : 'text-white' }}" href="{{ route('inscription.store') }}">Inscription formation</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-warning {{ request()->routeIs('admin.login') ? 'fw-bold' : '' }}" href="{{ route('admin.login') }}">Se connecter</a>
+                                <a class="nav-link {{ request()->routeIs('admin.login') ? 'fw-bold bg-warning' : 'text-white' }}" href="{{ route('admin.login') }}">Se connecter</a>
                             </li>
                         </ul>
                     @endauth

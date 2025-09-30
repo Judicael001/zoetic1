@@ -9,8 +9,6 @@
             <img src="{{ asset('assets/images/logo.jpg') }}" alt="Zoetic" style="width: 120px;">
         </div>
 
-        <h3 class="mb-4">Connexion administrateur</h3>
-
         @if(session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
